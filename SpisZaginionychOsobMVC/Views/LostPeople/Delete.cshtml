@@ -1,0 +1,64 @@
+﻿@model SpisZaginionychOsobMVC.Models.LostPerson
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Usuwanie osoby zaginionej</h2>
+
+<h3>Czy jesteś pewny?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Imię
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            Nazwisko
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Surname)
+        </dd>
+
+        <dt>
+            Wiek
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+
+        <dt>
+            Płeć
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+
+        <dt>
+            Opis
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Usuń" class="btn btn-danger" />
+            <br />
+            @Html.ActionLink("Powrót do spisu", "Index")
+        </div>
+    }
+</div>

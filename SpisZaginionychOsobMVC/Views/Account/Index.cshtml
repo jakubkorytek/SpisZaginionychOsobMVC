@@ -1,0 +1,53 @@
+﻿@model IEnumerable<SpisZaginionychOsobMVC.Models.ApplicationUser>
+@{
+    ViewBag.Title = "Index";
+
+}
+
+    <h2>Lista użytkowników</h2>
+
+    <table class="table">
+        <tr>
+            <th>
+                Adres Email
+            </th>
+            <th>
+                Potwierdzone konto?
+            </th>
+            <th>Akcje</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailConfirmed)
+                </td>
+                <td>
+                    <button class="btn btn-danger" onclick="location.href='@Url.Action("Delete",new { id=item.Id })'">Usuń</button>
+                    @if (item.Role == SpisZaginionychOsobMVC.Enums.Roles.Admin)
+                    {
+                        <button class="btn btn-danger" style="width:300px" onclick="location.href='@Url.Action("SetRole",new { id=item.Id,roleName = SpisZaginionychOsobMVC.Enums.Roles.ContentEditor})'">Odbierz prawa Administratora</button>
+
+                    }
+                    else
+                    {
+                        <button class="btn btn-success" style="width:300px" onclick="location.href='@Url.Action("SetRole",new { id=item.Id,roleName = SpisZaginionychOsobMVC.Enums.Roles.Admin})'">Nadaj prawa Administratora</button>
+                        if (item.Role == SpisZaginionychOsobMVC.Enums.Roles.ContentEditor)
+                        {
+                            <button class="btn btn-danger" style="width:100px" onclick="location.href='@Url.Action("SetRole",new { id=item.Id,roleName = SpisZaginionychOsobMVC.Enums.Roles.Banned})'">Zbanuj</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-success" style="width:100px" onclick="location.href='@Url.Action("SetRole",new { id=item.Id,roleName = SpisZaginionychOsobMVC.Enums.Roles.ContentEditor})'">Odbanuj</button>
+                        }
+                    }
+
+
+                </td>
+            </tr>
+        }
+
+    </table>
